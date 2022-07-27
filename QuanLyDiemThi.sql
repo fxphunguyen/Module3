@@ -1,0 +1,29 @@
+CREATE DATABASE QuanLyDiemThi;
+USE QuanLyDiemThi;
+CREATE TABLE HocSinh(
+	MaHS int PRIMARY KEY,
+    TenHS VARCHAR(50),
+    NgaySinh DATE,
+    Lop VARCHAR(20),
+    GT VARCHAR(20)
+);
+  CREATE TABLE MonHoc(
+	MaMH int PRIMARY KEY,
+	TenMH VARCHAR (30)
+);
+CREATE TABLE BangDiem(
+	MaHS int,
+    MaMH int,
+    DiemThi int,
+    NgayKt DATE,
+    PRIMARY KEY (MaHS, MaMH),
+    FOREIGN KEY (MaHS) REFERENCES HocSinh (MaHS),
+    FOREIGN KEY (MaMH) REFERENCES MonHoc (MaMH)
+);
+CREATE TABLE GiaoVien(
+    MaGV int PRIMARY KEY,
+    TenGV VARCHAR(20),
+    SDT VARCHAR(10)
+);
+ALTER TABLE MonHoc ADD MaGV int;
+ALTER TABLE MonHoc ADD CONSTRAINT FK_MaGV FOREIGN KEY (MaGV) REFERENCES GiaoVien(MaGV);
